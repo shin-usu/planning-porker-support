@@ -1,0 +1,30 @@
+name: PlanningPorkerSupport
+options:
+  bundleIdPrefix: com.planningPorkerSupport
+  deploymentTarget:
+    iOS: 14.0
+  developmentLanguage: ja
+
+targets:
+  PlanningPorkerSupport:
+    type: application
+    platform: iOS
+    sources:
+      - PlanningPorkerSupport
+    settings:
+      base:
+        CURRENT_PROJECT_VERSION: 1
+
+schemes:
+  PlanningPorkerSupport:
+    build:
+      targets:
+        PlanningPorkerSupport: all
+    run:
+      config: Debug
+    profile:
+      config: Release
+    analyze:
+      config: Debug
+    archive:
+      config: Release
