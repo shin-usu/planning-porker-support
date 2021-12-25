@@ -2,6 +2,7 @@ import Foundation
 
 protocol CountDownTimerUseCase {
     func execute(handler: @escaping (Int) -> Void)
+    func stop()
     func reset()
 }
 
@@ -26,6 +27,10 @@ final class CountDownTimerInteractor: CountDownTimerUseCase {
             }
             handler(self.remainingTime)
         }
+    }
+
+    func stop() {
+        timer?.invalidate()
     }
 
     /// 初期値に変更する
