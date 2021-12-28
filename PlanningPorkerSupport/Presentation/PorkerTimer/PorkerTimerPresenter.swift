@@ -1,10 +1,11 @@
 import Foundation
 import AudioToolbox
 
-final class PorkerTimerViewModel: ObservableObject {
+final class PorkerTimerPresenter: ObservableObject {
     @Published var countDownTime: Int = 10
     @Published var timerState: TimerState = .initial
 
+    let router: PorkerTimerWireframe
     private let countDownItr: CountDownTimerUseCase
     private let systemSoundItr: SystemSoundUseCase
 
@@ -14,10 +15,14 @@ final class PorkerTimerViewModel: ObservableObject {
         case stop
     }
 
-    init () {
-        let systemSoundRepo = SystemSoundRepositoryImpl(systemSoundId: 1109)
-        self.systemSoundItr = SystemSoundInteractor(repo: systemSoundRepo)
-        self.countDownItr = CountDownTimerInteractor(countDownTime: 10)
+    init (
+        router: PorkerTimerWireframe = PorkerTimerRouter(),
+        systemSoundItr: SystemSoundUseCase = SystemSoundInteractor(),
+        countDownItr: CountDownTimerUseCase = CountDownTimerInteractor(countDownTime: 10)
+    ) {
+        self.router = router
+        self.systemSoundItr = systemSoundItr
+        self.countDownItr = countDownItr
     }
 
     func startTimer() {
@@ -31,8 +36,8 @@ final class PorkerTimerViewModel: ObservableObject {
             }
         }
     }
-    
-    func stop() {
+
+    func stopTimer() {
         DispatchQueue.main.async { [weak self] in
             self?.timerState = .stop
         }

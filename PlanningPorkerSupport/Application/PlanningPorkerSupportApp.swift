@@ -4,7 +4,9 @@ import SwiftUI
 struct PlanningPorkerSupportApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            NavigationView {
+                PorkerTimerView()
+            }
         }
     }
 }
