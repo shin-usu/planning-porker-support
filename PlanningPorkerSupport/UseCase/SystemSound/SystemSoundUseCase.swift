@@ -9,7 +9,9 @@ protocol SystemSoundUseCase {
 final class SystemSoundInteractor: SystemSoundUseCase {
     private let repo: SystemSoundRepository
 
-    init(repo: SystemSoundRepository) {
+    init(
+        repo: SystemSoundRepository = SystemSoundRepositoryImpl(systemSoundId: 1109)
+    ) {
         self.repo = repo
     }
 
